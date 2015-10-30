@@ -14,7 +14,7 @@ import javax.persistence.EntityTransaction;
 import org.omnifaces.cdi.ViewScoped;
 
 import model.Usuario;
-//teste
+
 @Named(value="usuarioBean")
 @ViewScoped
 public class UsuarioBean implements Serializable{
