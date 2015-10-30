@@ -20,7 +20,7 @@ import model.Usuario;
 public class UsuarioBean implements Serializable{
 	
 	private Usuario usuario = new Usuario();
-	
+	//teste
 	@Inject
 	private EntityManager manager ;
 	
