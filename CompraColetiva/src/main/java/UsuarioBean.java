@@ -23,7 +23,7 @@ public class UsuarioBean implements Serializable{
 	
 	@Inject
 	private EntityManager manager ;
-	//teste
+	
 	private List<Usuario> todos = new ArrayList<Usuario>();
 	
 	public void salvar(){
