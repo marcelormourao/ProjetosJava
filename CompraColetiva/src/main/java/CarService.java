@@ -41,10 +41,10 @@ public class CarService {
         brands[9] = "Ford";
     }
      
-    public List<Car> createCars(int size) {
-        List<Car> list = new ArrayList<Car>();
+    public List<Produto> createCars(int size) {
+        List<Produto> list = new ArrayList<Produto>();
         for(int i = 0 ; i < size ; i++) {
-            list.add(new Car(getRandomId(), getRandomBrand(), getRandomYear(), getRandomColor(), getRandomPrice(), getRandomSoldState()));
+            list.add(new Produto(getRandomId(), getRandomBrand(), getRandomYear(), getRandomColor(), getRandomPrice(), getRandomSoldState()));
         }
          
         return list;

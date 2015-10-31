@@ -6,30 +6,37 @@
 	  xmlns:p="http://primefaces.org/ui">
 	  
 	<h:head>
-		<title><ui:insert name="titulo">MKanban</ui:insert></title>
+		<title><ui:insert name="titulo">Site de Compra Coletiva</ui:insert></title>
 		<h:outputStylesheet library="css" name="estilo.css"/>
 		<h:outputScript library="js" name="sistema.js"/>
 	</h:head>
 	
 	<h:body>
 		<div id="header">
-<!-- 			MKanban - Organize seus projetos de maneira eficiente! -->
-				MKanban
+				Site Compra Coletiva
 		</div>
 		
 		<div id="conteudo">
 			<h:form>
 				<p:menubar id="menu">
-					<p:submenu label="Cadastro" icon="ui-icon-document">
+					<p:submenu label="Arquivo" icon="ui-icon-document">
 						<p:menuitem value="Usuário" url="usuario.xhtml" />
+						<p:menuitem value="Comprar" url="Venda.xhtml" />
 						<p:menuitem value="Ajuda" url="Ajuda.xhtml" />
 						<p:separator />
 						<p:menuitem value="Sair" action="#{ajuda.sair}"/>
 					</p:submenu>
 				</p:menubar>
 			</h:form>
+
+			<!-- <p:fileUpload cancelLabel="#{contenu.annuler}"
+		        fileUploadListener="#{utilAdminBean.fileUpload}"
+		        allowTypes="/(\.|\/)(doc|docx|xls|xlsx|pdf)$/"
+		        multiple="false" mode="advanced" sizeLimit="52428800"
+		        showButtons="false" /> -->
 			
 			<p:messages autoUpdate="true" closable="true"/>
+				
 			<ui:insert name="conteudo"/>
 		</div>
 		

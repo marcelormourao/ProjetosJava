@@ -11,9 +11,9 @@ import javax.faces.bean.ViewScoped;
 @ViewScoped
 public class DataGridView implements Serializable {
      
-    private List<Car> cars;
+    private List<Produto> cars;
      
-    private Car selectedCar;
+    private Produto selectedCar;
      
     @ManagedProperty("#{carService}")
     private CarService service;
@@ -23,7 +23,7 @@ public class DataGridView implements Serializable {
         cars = service.createCars(12);
     }
  
-    public List<Car> getCars() {
+    public List<Produto> getCars() {
         return cars;
     }
  
@@ -31,11 +31,11 @@ public class DataGridView implements Serializable {
         this.service = service;
     }
  
-    public Car getSelectedCar() {
+    public Produto getSelectedCar() {
         return selectedCar;
     }
  
-    public void setSelectedCar(Car selectedCar) {
+    public void setSelectedCar(Produto selectedCar) {
         this.selectedCar = selectedCar;
     }
 }
