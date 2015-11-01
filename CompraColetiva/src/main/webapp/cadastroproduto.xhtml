@@ -16,12 +16,17 @@
 				<p:outputLabel value="Titulo:." for="titulo"/>
 				<p:inputText id="titulo" value="#{cadastroProdutoBean.produto.titulo}" size="100"/>
 				
+				<p:outputLabel for="telefone" value="Telefone:" />
+        		<p:inputMask id="telefone" value="#{cadastroProdutoBean.produto.telefoneVendedor}" 
+        			mask="(99) 99999-9999"/>
+				
 				<p:outputLabel value="Descrição:." for="descricao"/>
 				<h:panelGroup>
-					<p:inputTextarea id="descricao" rows="5" cols="100" counter="display"
+					<p:inputTextarea id="descricao" rows="5" 
+					    value="#{cadastroProdutoBean.produto.descricao}"
+					    cols="100" counter="display"
 					 	maxlength="255" autoResize="false"
-					 	counterTemplate="{0} caracteres restantes." 
-					 	/>
+					 	counterTemplate="{0} caracteres restantes." />
 		            <br/>
 		            <h:outputText id="display" />
 	            </h:panelGroup>
@@ -41,7 +46,12 @@
 		                    previewWidth="200"
 		                    widgetVar="TESTE"/>
 		            <p:outputLabel id="fileName" value="#{cadastroProdutoBean.produto.fileName}"/>
-		       </h:panelGroup>				
+		       </h:panelGroup>
+		       
+		       <p:commandButton value="Salvar" action="#{cadastroProdutoBean.salvar}"
+		       		update="@form"/>
+		       <p:outputLabel/>
+		       			
 			</p:panelGrid>
 		</h:form>
 	</ui:define>

@@ -12,56 +12,55 @@
 	
 	<h:outputStylesheet library="css" name="venda.css"/>
 
-		<h:form id="form">
-			<p:dataGrid var="car" value="#{dataGridView.cars}" columns="3"
-				layout="grid" rows="12" paginator="true" id="cars"
+		<h:form id="form" enctype="multipart/form-data">
+			<p:dataGrid var="produto" value="#{vendaProdutosBean.produtos}" columns="3"
+				layout="grid" rows="12" paginator="true" id="produtos"
 				rowsPerPageTemplate="6,12,16" paginatorPosition="bottom">
 
 				<f:facet name="header">
             		Ofertas
         		</f:facet>
 
-				<p:panel header="#{car.titulo}" style="text-align:center">
+				<p:panel header="#{produto.titulo}" style="text-align:center">
 					<h:panelGrid columns="1" style="width:100%">
-						<!-- <p:graphicImage name="demo/images/car/#{car.brand}.gif"/> -->
-						<p:graphicImage name="images/Audi.gif" />
+						
+						<p:graphicImage value="#{produto.imagem}"/>
 
-						<h:outputText value="#{car.ano}" />
+						<h:outputText />
 
-						<p:commandLink value="Comprar" update=":form:carDetail"
-							oncomplete="PF('carDialog').show()" title="View Detail">
+						<p:commandLink value="Comprar" update=":form:produtoDetail"
+							oncomplete="PF('produtoDialog').show()" title="Detalhes">
 							<h:outputText styleClass="ui-icon ui-icon-search"
 								style="margin:0 auto;" />
-							<f:setPropertyActionListener value="#{car}"
-								target="#{dataGridView.selectedCar}" />
+							<f:setPropertyActionListener value="#{produto}"
+								target="#{vendaProdutosBean.produtoSelecionado}" />
 						</p:commandLink>
 					</h:panelGrid>
 				</p:panel>
 
 			</p:dataGrid>
 
-			<p:dialog header="Car Info" widgetVar="carDialog" modal="true"
+			<p:dialog header="Produto" widgetVar="produtoDialog" modal="true"
 				showEffect="fade" hideEffect="fade" resizable="false">
-				<p:outputPanel id="carDetail" style="text-align:center;">
+				<p:outputPanel id="produtoDetail" style="text-align:center;">
 					<p:panelGrid columns="2"
-						rendered="#{not empty dataGridView.selectedCar}"
+						rendered="#{not empty vendaProdutosBean.produtoSelecionado}"
 						columnClasses="label,value">
 						<f:facet name="header">
-							<p:graphicImage name="images/Audi.gif" />
+							<p:graphicImage value="#{vendaProdutosBean.produtoSelecionado.imagem}"/>
 						</f:facet>
 
-						<h:outputText value="Id:" />
-						<h:outputText value="#{dataGridView.selectedCar.titulo}" />
+						<h:outputText value="Titulo:" />
+						<h:outputText value="#{vendaProdutosBean.produtoSelecionado.titulo}" />
 
-						<h:outputText value="Year" />
-						<h:outputText value="#{dataGridView.selectedCar.ano}" />
+						<h:outputText value="Telefone:" />
+						<h:outputText value="#{vendaProdutosBean.produtoSelecionado.telefoneVendedor}" />
 
-						<h:outputText value="Color:" />
-						<h:outputText value="#{dataGridView.selectedCar.color}"
-							style="color:#{dataGridView.selectedCar.color}" />
+						<h:outputText value="Descrição:" />
+						<h:outputText value="#{vendaProdutosBean.produtoSelecionado.descricao}" />
 
-						<h:outputText value="Price" />
-						<h:outputText value="$#{dataGridView.selectedCar.price}" />
+						<h:outputText value="Preço:" />
+						<h:outputText value="#{vendaProdutosBean.produtoSelecionado.preco}" />
 					</p:panelGrid>
 				</p:outputPanel>
 			</p:dialog>

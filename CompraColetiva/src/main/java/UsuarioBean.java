@@ -13,6 +13,7 @@ import javax.persistence.EntityTransaction;
 
 import org.omnifaces.cdi.ViewScoped;
 
+import util.jpa.transactional.Transactional;
 import model.Usuario;
 
 @Named(value="usuarioBean")
@@ -26,13 +27,10 @@ public class UsuarioBean implements Serializable{
 	
 	private List<Usuario> todos = new ArrayList<Usuario>();
 	
+	@Transactional
 	public void salvar(){
-		EntityTransaction trx = manager.getTransaction();
-		trx.begin();
 		
 		manager.merge(usuario);
-		
-		trx.commit();
 		
 		usuario = new Usuario();
 		
@@ -50,13 +48,10 @@ public class UsuarioBean implements Serializable{
 		return todos;
 	}
 	
+	@Transactional
 	public void remover(){
-		EntityTransaction trx = manager.getTransaction();
-		trx.begin();
-		
-		manager.remove(usuario);
-		
-		trx.commit();
+		 manager.remove(manager.getReference(Usuario.class, usuario.getId()));
+//		 manager.remove(manager.find(Usuario.class, usuario.getId()));	
 	}
 
 	public Usuario getUsuario() {

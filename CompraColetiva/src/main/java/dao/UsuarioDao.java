@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 
 import model.Usuario;
 
-//@Named
 @RequestScoped
 public class UsuarioDao {
 	
