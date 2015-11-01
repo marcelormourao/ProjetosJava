@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<ui:composition template="/WEB-INF/templates/TemplatePadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="conteudo">
+		<h:form enctype="multipart/form-data">
+			<p:panelGrid columns="2">
+				<p:outputLabel value="Titulo:." for="titulo"/>
+				<p:inputText id="titulo" value="#{cadastroProdutoBean.produto.titulo}"/>
+				
+				<p:outputLabel value="Titulo:." for="descricao"/>
+				<p:inputText id="descricao" value="#{cadastroProdutoBean.produto.descricao}"/>
+				
+				<p:outputLabel value="Foto:." for="foto"/>
+				<p:fileUpload id="foto" fileUploadListener="#{cadastroProdutoBean.processFileUpload}"
+	                    label="Escolher" cancelLabel="Cancelar" sizeLimit="400000000"
+	                    mode="advanced"
+	                    invalidSizeMessage="Imagem muito grande!" auto="true"
+	                    invalidFileMessage="Tipo de imagem não suportado!"
+	                    allowTypes="/(\.|\/)(jpe?g|png|jpg)$/" 
+	                    value="#{cadastroProdutoBean.produto.imagem}"/>
+	               
+	            <p:outputLabel value="teste"/>  
+	            <p:fileUpload fileUploadListener="#{cadastroProdutoBean.processFileUpload}"
+	                    label="Escolher" cancelLabel="Cancelar" sizeLimit="400000000"
+	                    mode="simple"
+	                    invalidSizeMessage="Imagem muito grande!" auto="true"
+	                    invalidFileMessage="Tipo de imagem não suportado!"
+	                    allowTypes="/(\.|\/)(jpe?g|png|jpg)$/" 
+	                    value="#{cadastroProdutoBean.produto.imagem}"/>
+	                    
+	            <p:outputLabel value="Foto:." for="foto2"/>     
+	            <p:fileUpload id="foto2" value="#{fileUploadView.file}" mode="simple" skinSimple="true"/>
+				
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>
+

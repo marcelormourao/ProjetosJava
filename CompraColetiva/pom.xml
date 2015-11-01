@@ -85,12 +85,28 @@
 			<scope>compile</scope>
 		</dependency>
 
-	 <dependency>
-		<groupId>org.omnifaces</groupId>
-		<artifactId>omnifaces</artifactId>
-		<version>2.0</version>
-		<scope>compile</scope>
-	</dependency>
+		<dependency>
+			<groupId>org.omnifaces</groupId>
+			<artifactId>omnifaces</artifactId>
+			<version>2.0</version>
+			<scope>compile</scope>
+		</dependency>
 		
+		<!-- Uploads de arquivo -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+			<scope>compile</scope>
+		</dependency>
+	
+		<!-- Uploads de arquivo -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2</version>
+			<scope>compile</scope>
+		</dependency>
+
 	</dependencies>
 </project>

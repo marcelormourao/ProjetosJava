@@ -1,4 +1,5 @@
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -44,27 +45,27 @@ public class CarService {
     public List<Produto> createCars(int size) {
         List<Produto> list = new ArrayList<Produto>();
         for(int i = 0 ; i < size ; i++) {
-            list.add(new Produto(getRandomId(), getRandomBrand(), getRandomYear(), getRandomColor(), getRandomPrice(), getRandomSoldState()));
+            list.add(new Produto("Teste", "\\images\\Audi.gif", null, "descricao", new BigDecimal(0), true));
         }
          
         return list;
     }
      
-    private String getRandomId() {
-        return UUID.randomUUID().toString().substring(0, 8);
-    }
-     
-    private int getRandomYear() {
-        return (int) (Math.random() * 50 + 1960);
-    }
-     
-    private String getRandomColor() {
-        return colors[(int) (Math.random() * 10)];
-    }
-     
-    private String getRandomBrand() {
-        return brands[(int) (Math.random() * 10)];
-    }
+//    private String getRandomId() {
+//        return UUID.randomUUID().toString().substring(0, 8);
+//    }
+//     
+//    private int getRandomYear() {
+//        return (int) (Math.random() * 50 + 1960);
+//    }
+//     
+//    private String getRandomColor() {
+//        return colors[(int) (Math.random() * 10)];
+//    }
+//     
+//    private String getRandomBrand() {
+//        return brands[(int) (Math.random() * 10)];
+//    }
      
     public int getRandomPrice() {
         return (int) (Math.random() * 100000);

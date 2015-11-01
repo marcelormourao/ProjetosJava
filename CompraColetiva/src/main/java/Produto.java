@@ -1,92 +1,88 @@
+import java.math.BigDecimal;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+
+@Entity
 public class Produto {
 	
-	private String id;
-	private String brand;
-	private int year;
-	private String color;
-	private int price;
-	private boolean vendido;
+	@Id
+	@GeneratedValue
+	private Integer id;
 	
-	public Produto(String id, String brand, int ano, String cor, int preco, boolean vendido) {
-		this.id = id;
-		this.brand = brand;
-		this.year = ano;
-		this.color = cor;
-		this.price = preco;
+	private String titulo;
+	
+	private String caminhoImagem;
+	
+	@Lob
+	private byte[] imagem;
+	
+	private String descricao;
+	
+	private BigDecimal preco;
+	
+	private boolean vendido;
+
+	public Produto(String titulo, String caminhoImagem, byte[] imagem, String descricao, BigDecimal preco, boolean vendido) {
+		this.titulo = titulo;
+		this.caminhoImagem = caminhoImagem;
+		this.imagem = imagem;
+		this.descricao = descricao;
+		this.preco = preco;
 		this.vendido = vendido;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
+	public Produto() {
+		
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Produto other = (Produto) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
+	public String getTitulo() {
+		return titulo;
 	}
 
-	public String getId() {
-		return id;
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public String getCaminhoImagem() {
+		return caminhoImagem;
 	}
 
-	public String getBrand() {
-		return brand;
+	public void setCaminhoImagem(String caminhoImagem) {
+		this.caminhoImagem = caminhoImagem;
 	}
 
-	public void setBrand(String brand) {
-		this.brand = brand;
+	public byte[] getImagem() {
+		return imagem;
 	}
 
-	public int getYear() {
-		return year;
+	public void setImagem(byte[] imagem) {
+		this.imagem = imagem;
 	}
 
-	public void setYear(int year) {
-		this.year = year;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public String getColor() {
-		return color;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
-	public void setColor(String color) {
-		this.color = color;
+	public BigDecimal getPreco() {
+		return preco;
 	}
 
-	public int getPrice() {
-		return price;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
+	public void setPreco(BigDecimal preco) {
+		this.preco = preco;
 	}
 
 	public boolean isVendido() {
 		return vendido;
 	}
-	
+
 	public void setVendido(boolean vendido) {
 		this.vendido = vendido;
-	}
+	}	
 }
