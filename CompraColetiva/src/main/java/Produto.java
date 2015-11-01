@@ -14,7 +14,7 @@ public class Produto {
 	
 	private String titulo;
 	
-	private String caminhoImagem;
+	private String fileName;
 	
 	@Lob
 	private byte[] imagem;
@@ -27,7 +27,7 @@ public class Produto {
 
 	public Produto(String titulo, String caminhoImagem, byte[] imagem, String descricao, BigDecimal preco, boolean vendido) {
 		this.titulo = titulo;
-		this.caminhoImagem = caminhoImagem;
+		this.fileName = caminhoImagem;
 		this.imagem = imagem;
 		this.descricao = descricao;
 		this.preco = preco;
@@ -44,14 +44,6 @@ public class Produto {
 
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
-	}
-
-	public String getCaminhoImagem() {
-		return caminhoImagem;
-	}
-
-	public void setCaminhoImagem(String caminhoImagem) {
-		this.caminhoImagem = caminhoImagem;
 	}
 
 	public byte[] getImagem() {
@@ -84,5 +76,13 @@ public class Produto {
 
 	public void setVendido(boolean vendido) {
 		this.vendido = vendido;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}	
 }

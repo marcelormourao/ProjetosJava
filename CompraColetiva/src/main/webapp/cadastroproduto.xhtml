@@ -9,35 +9,39 @@
 	xmlns:o="http://omnifaces.org/ui">
 
 	<ui:define name="conteudo">
-		<h:form enctype="multipart/form-data">
+		<h:outputStylesheet library="css" name="grids.css"/>
+	
+		<h:form id="form" enctype="multipart/form-data">
 			<p:panelGrid columns="2">
 				<p:outputLabel value="Titulo:." for="titulo"/>
-				<p:inputText id="titulo" value="#{cadastroProdutoBean.produto.titulo}"/>
+				<p:inputText id="titulo" value="#{cadastroProdutoBean.produto.titulo}" size="100"/>
 				
-				<p:outputLabel value="Titulo:." for="descricao"/>
-				<p:inputText id="descricao" value="#{cadastroProdutoBean.produto.descricao}"/>
-				
-				<p:outputLabel value="Foto:." for="foto"/>
-				<p:fileUpload id="foto" fileUploadListener="#{cadastroProdutoBean.processFileUpload}"
-	                    label="Escolher" cancelLabel="Cancelar" sizeLimit="400000000"
-	                    mode="advanced"
-	                    invalidSizeMessage="Imagem muito grande!" auto="true"
-	                    invalidFileMessage="Tipo de imagem não suportado!"
-	                    allowTypes="/(\.|\/)(jpe?g|png|jpg)$/" 
-	                    value="#{cadastroProdutoBean.produto.imagem}"/>
-	               
-	            <p:outputLabel value="teste"/>  
-	            <p:fileUpload fileUploadListener="#{cadastroProdutoBean.processFileUpload}"
-	                    label="Escolher" cancelLabel="Cancelar" sizeLimit="400000000"
-	                    mode="simple"
-	                    invalidSizeMessage="Imagem muito grande!" auto="true"
-	                    invalidFileMessage="Tipo de imagem não suportado!"
-	                    allowTypes="/(\.|\/)(jpe?g|png|jpg)$/" 
-	                    value="#{cadastroProdutoBean.produto.imagem}"/>
-	                    
-	            <p:outputLabel value="Foto:." for="foto2"/>     
-	            <p:fileUpload id="foto2" value="#{fileUploadView.file}" mode="simple" skinSimple="true"/>
-				
+				<p:outputLabel value="Descrição:." for="descricao"/>
+				<h:panelGroup>
+					<p:inputTextarea id="descricao" rows="5" cols="100" counter="display"
+					 	maxlength="255" autoResize="false"
+					 	counterTemplate="{0} caracteres restantes." 
+					 	/>
+		            <br/>
+		            <h:outputText id="display" />
+	            </h:panelGroup>
+	            
+	            <p:outputLabel value="Foto:." for="foto"/>
+				<h:panelGroup>
+					<p:fileUpload id="foto" fileUploadListener="#{cadastroProdutoBean.processFileUpload}"
+		                    label="Foto" cancelLabel="Cancelar" sizeLimit="4000000"
+		                    mode="advanced"
+		                    invalidSizeMessage="Imagem muito grande!"
+		                    invalidFileMessage="Tipo de imagem não suportado!"
+		                    fileLimitMessage="Número máximo de arquivos excedido!"
+		                    allowTypes="/(\.|\/)(jpe?g|png|jpg)$/" 
+		                    value="teste"
+		                    update="@this fileName"
+		                    fileLimit="1"
+		                    previewWidth="200"
+		                    widgetVar="TESTE"/>
+		            <p:outputLabel id="fileName" value="#{cadastroProdutoBean.produto.fileName}"/>
+		       </h:panelGroup>				
 			</p:panelGrid>
 		</h:form>
 	</ui:define>
