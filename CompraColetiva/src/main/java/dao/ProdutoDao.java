@@ -5,11 +5,13 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 
 import util.jpa.transactional.Transactional;
 import model.Produto;
 
 @RequestScoped
+
 public class ProdutoDao {
 	
 	@Inject
@@ -17,10 +19,13 @@ public class ProdutoDao {
 	
 	@Transactional
 	public void salvar(Produto produto){
-		manager.merge(produto);
+		EntityTransaction trx = manager.getTransaction();
+		trx.begin();
+			manager.merge(produto);
+			
+			trx.commit();
 	}
 	
-	@Transactional
 	public List<Produto> findAll(){
 		return manager.createQuery("FROM Produto p", Produto.class).getResultList();
 	}

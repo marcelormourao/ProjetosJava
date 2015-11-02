@@ -15,7 +15,7 @@ import org.primefaces.model.UploadedFile;
 import dao.ProdutoDao;
 
 @Named
-@SessionScoped
+@ViewScoped
 public class CadastroProdutoBean implements Serializable{
 	
 	private static final long serialVersionUID = 8611854415913452658L;
