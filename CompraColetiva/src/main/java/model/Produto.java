@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,6 +16,7 @@ import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
 @Entity
+@ApplicationScoped
 public class Produto {
 	
 	@Id
@@ -128,5 +130,13 @@ public class Produto {
 
 	public void setTelefoneVendedor(String telefoneVendedor) {
 		this.telefoneVendedor = telefoneVendedor;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}	
 }
