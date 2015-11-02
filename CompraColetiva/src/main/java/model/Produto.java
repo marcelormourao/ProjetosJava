@@ -1,5 +1,9 @@
 package model;
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
@@ -43,7 +47,6 @@ public class Produto {
 	}
 
 	public Produto() {
-		
 	}
 
 	public String getTitulo() {
@@ -60,6 +63,27 @@ public class Produto {
 	
 	public byte[] getImagem2(){   
 		return this.imagem;	 
+	}
+	
+	public String getImagem3(){
+		File file = null;
+		FileOutputStream fos = null;
+		
+		try {
+			file = new File(System.getProperty("D:\\images\\"+fileName));
+			fos = new FileOutputStream(file);
+			fos.write(this.imagem);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}finally{
+			try {
+				fos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return "\\images\\"+fileName;
 	}
 
 	public void setImagem(byte[] imagem) {

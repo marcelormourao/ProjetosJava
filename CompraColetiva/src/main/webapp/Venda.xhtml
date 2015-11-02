@@ -24,8 +24,8 @@
 				<p:panel header="#{produto.titulo}" style="text-align:center">
 					<h:panelGrid columns="1" style="width:100%">
 						
-						<p:graphicImage value="#{produto.imagem}"/>
-
+						<p:graphicImage name="images\loading.gif" value="#{produto.imagem}" width="132" height="170"/>
+						
 						<h:outputText />
 
 						<p:commandLink value="Comprar" update=":form:produtoDetail"
