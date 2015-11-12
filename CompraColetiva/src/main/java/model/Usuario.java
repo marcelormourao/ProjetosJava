@@ -15,6 +15,8 @@ public class Usuario {
 	private String login;
 	
 	private String senha;
+	
+	private String email;
 
 	public Long getId() {
 		return id;
@@ -47,6 +49,10 @@ public class Usuario {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+	
+	public String getSenhaOculta(){
+		return this.senha.replaceAll("[a-zA-Z]|\\d|\\D", "*");
+	}
 
 	@Override
 	public int hashCode() {
@@ -76,5 +82,13 @@ public class Usuario {
 	@Override
 	public String toString(){
 		return nome;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }

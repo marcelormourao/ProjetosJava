@@ -2,21 +2,18 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.application.FacesMessage.Severity;
-import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 
-import org.omnifaces.cdi.ViewScoped;
-
-import util.jpa.transactional.Transactional;
 import model.Usuario;
+import util.MessagesUtil;
+import util.jpa.transactional.Transactional;
 
 @Named(value="usuarioBean")
+//@ViewScoped
 @ViewScoped
 public class UsuarioBean implements Serializable{
 	
@@ -28,30 +25,50 @@ public class UsuarioBean implements Serializable{
 	private List<Usuario> todos = new ArrayList<Usuario>();
 	
 	@Transactional
-	public void salvar(){
+	public String salvar(){
+		
+		/*Se Cadastrando novo usuário*/
+		if(usuario.getId() == null){
+			/*Se login não Disponível*/
+			if(!loginDisponivel()){
+				MessagesUtil.addErrorMessage("Login já está em uso!");
+				return null;
+			}
+		}
 		
 		manager.merge(usuario);
 		
 		usuario = new Usuario();
 		
-		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!", "Salvo com sucesso!");
-		
-		FacesContext context =  FacesContext.getCurrentInstance();
-		context.addMessage("salvo", msg);
-		
+		MessagesUtil.addInformationMessage("Salvo com sucesso!");
+			
+//		return "usuario.xhtml?faces-redirect=true";
+		return "";
 	}
 	
 	public List<Usuario> getTodos(){
-//		if(!FacesContext.getCurrentInstance().isPostback()){		
-			this.todos = this.manager.createQuery("FROM Usuario u", Usuario.class).getResultList();
-//		}
+		
+		this.todos = this.manager.createQuery("FROM Usuario u", Usuario.class).getResultList();
+
 		return todos;
+	}
+	
+	public boolean loginDisponivel(){
+		try{	
+			Usuario login = manager
+				.createQuery("FROM Usuario u WHERE u.login = :login", Usuario.class)
+				.setParameter("login", usuario.getLogin())
+				.getSingleResult();
+			
+			return false;
+		}catch(NoResultException nre){
+			return true;
+		}
 	}
 	
 	@Transactional
 	public void remover(){
-		 manager.remove(manager.getReference(Usuario.class, usuario.getId()));
-//		 manager.remove(manager.find(Usuario.class, usuario.getId()));	
+		 manager.remove(manager.getReference(Usuario.class, usuario.getId()));	
 	}
 
 	public Usuario getUsuario() {
@@ -62,15 +79,11 @@ public class UsuarioBean implements Serializable{
 		this.usuario = usuario != null ? usuario : new Usuario();
 	}
 	
-	public void validarNome(){
-		if(this.usuario.getNome().equalsIgnoreCase("Mailson")){
-			String msg = "Cara de rato não é aceito neste sistemas!";
-			FacesMessage fmsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg, msg);
-			FacesContext.getCurrentInstance().addMessage("Rato detectado", fmsg);
+	public void validarLogin(){
+		if(!loginDisponivel()){
+			MessagesUtil.addErrorMessage("Login não está disponível!");
 		}else{
-			String msg = "Login válido!";
-			FacesMessage fmsg = new FacesMessage(FacesMessage.SEVERITY_INFO, msg, msg);
-			FacesContext.getCurrentInstance().addMessage("login_valido", fmsg);
+			MessagesUtil.addInformationMessage("Login Disponível!");
 		}
 	}
 	

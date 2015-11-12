@@ -23,25 +23,21 @@
 		<div id="formulario">
 			<h:form>
 				<p:panelGrid id="panelGrid" columns="2" >
-				
-					<p:outputLabel value="Nome:." for="nome"/>
-					
-					<h:panelGroup>
-						<p:inputText id="nome" size="60" required="true" value="#{usuarioBean.usuario.nome}"
-							style="margin-right : 10px"/>
-						<p:commandButton value="Validar Nome" process="@this nome" action="#{usuarioBean.validarNome}"/>
-					</h:panelGroup>
 					
 					<p:outputLabel value="Login:." for="login"/>
-					<p:inputText id="login" required="true" value="#{usuarioBean.usuario.login}" autocomplete="off"
-						/>
+					<h:panelGroup>
+						<p:inputText id="login" required="true" value="#{usuarioBean.usuario.login}" autocomplete="off"/>
+					</h:panelGroup>
 					
 					<p:outputLabel value="Senha:." for="senha"/>
-					<p:password id="senha" required="true" value="#{usuarioBean.usuario.senha}" autocomplete="off"
-						/>
+					<p:password id="senha" required="true" value="#{usuarioBean.usuario.senha}" autocomplete="off"/>
 						
+					<p:outputLabel value="Nome:." for="nome"/>
+					
+					<p:inputText id="nome" size="60" required="true" value="#{usuarioBean.usuario.nome}"/>
+							
 					<p:outputLabel value="Email:." for="email"/>
-					<p:inputText id="email" size="60" required="true" value="#{usuarioBean.usuario.nome}"
+					<p:inputText id="email" size="60" required="true" value="#{usuarioBean.usuario.email}"
 							style="margin-right : 10px"/>
 					
 					<p:outputLabel />
@@ -74,10 +70,14 @@
 				</p:column>
 				
 				<p:column headerText="Senha">
-					<h:outputText value="#{user.senha}" />
+					<h:outputText value="#{user.senhaOculta}" />
 				</p:column>
 				
-				<p:column >
+				<p:column headerText="Email" style="width:30%">
+					<h:outputText value="#{user.email}" />
+				</p:column>
+				
+				<p:column headerText="Opções" style="width:68px">
 					<p:commandButton icon="ui-icon-trash" action="#{usuarioBean.remover}" update="table">
 						<f:setPropertyActionListener value="#{user}" target="#{usuarioBean.usuario}" />	
 					</p:commandButton>
