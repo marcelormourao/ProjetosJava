@@ -12,7 +12,7 @@ import util.MessagesUtil;
 import dao.UsuarioDao;
 
 @Named(value="usuarioBean")
-@RequestScoped
+@org.omnifaces.cdi.ViewScoped
 public class UsuarioBean implements Serializable{
 	
 	private static final long serialVersionUID = -4176584480398173213L;
