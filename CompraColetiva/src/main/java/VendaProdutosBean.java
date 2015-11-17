@@ -3,17 +3,15 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import model.Produto;
-
-import org.omnifaces.cdi.ViewScoped;
-
 import dao.ProdutoDao;
  
 @Named
-@ViewScoped
+@RequestScoped
 public class VendaProdutosBean implements Serializable {
 	
 	private static final long serialVersionUID = 7930666844267416194L;
@@ -45,11 +43,4 @@ public class VendaProdutosBean implements Serializable {
 		this.produtoSelecionado = produtoSelecionado;
 	}
     
-//    @ManagedProperty("#{carService}")
-//    private CarService service;
-     
-//    @PostConstruct
-//    public void init() {
-//        produtos = service.createCars(12);
-//    }
 }

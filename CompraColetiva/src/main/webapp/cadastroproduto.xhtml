@@ -7,23 +7,40 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui" 
 	xmlns:o="http://omnifaces.org/ui">
-
+	
 	<ui:define name="conteudo">
 		<h:outputStylesheet library="css" name="grids.css"/>
 		<h:outputStylesheet library="css" name="cadastroproduto.css"/>
-	
+		<h:outputScript library="js" name="jquery.maskMoney.js"/>
+		
+		<script>
+			function configurarMoeda(){
+				$(".moeda").maskMoney({decimal: ",", thousands:".", allowZero: true});
+			}
+
+			$(document).ready(function(){
+				configurarMoeda();
+			});
+		</script>
+		
 		<h:form id="form" enctype="multipart/form-data">
 			<p:panelGrid columns="2">
 				<p:outputLabel value="Titulo:." for="titulo"/>
-				<p:inputText id="titulo" value="#{cadastroProdutoBean.produto.titulo}" size="100"/>
+				<p:inputText id="titulo" value="#{cadastroProdutoBean.produto.titulo}" size="100" required="true"/>
 				
 				<p:outputLabel for="telefone" value="Telefone:" />
-        		<p:inputMask id="telefone" value="#{cadastroProdutoBean.produto.telefoneVendedor}" 
-        			mask="(99) 99999-9999"/>
+        		
+        		<h:panelGroup>
+	        		<p:inputMask id="telefone" value="#{cadastroProdutoBean.produto.telefoneVendedor}" required="true" 
+	        			mask="(99) 99999-9999"/>
+	        		
+	        		<p:outputLabel for="preco" value="Preço:" style="margin-left: 15px; margin-right: 10px;"/>	
+	        		<p:inputText id="preco" value="#{cadastroProdutoBean.produto.preco}" required="true" styleClass="moeda"/>
+	        	</h:panelGroup>
 				
 				<p:outputLabel value="Descrição:." for="descricao"/>
 				<h:panelGroup>
-					<p:inputTextarea id="descricao" rows="5" 
+					<p:inputTextarea id="descricao" rows="5" required="true"
 					    value="#{cadastroProdutoBean.produto.descricao}"
 					    cols="100" counter="display"
 					 	maxlength="255" autoResize="false"
@@ -45,7 +62,9 @@
 		                    update="@this fileName"
 		                    fileLimit="1"
 		                    previewWidth="200"
-		                    widgetVar="TESTE"/>
+		                    widgetVar="TESTE"
+		                    required="true" 
+		                    requiredMessage="É necessário anexar uma foto do produto!"/>
 		            <p:outputLabel id="fileName" value="#{cadastroProdutoBean.produto.fileName}"/>
 		       </h:panelGroup>
 		       
@@ -55,6 +74,7 @@
 		       			
 			</p:panelGrid>
 		</h:form>
+		
 	</ui:define>
 </ui:composition>
 

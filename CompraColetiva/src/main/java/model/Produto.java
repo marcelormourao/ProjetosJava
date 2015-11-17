@@ -34,12 +34,12 @@ public class Produto {
 	
 	private String descricao;
 	
-	private BigDecimal preco;
+	private String preco = "";
 	
 	private boolean vendido;
 
 	public Produto(String titulo, String caminhoImagem, byte[] imagem, String descricao,
-			BigDecimal preco, boolean vendido) {
+			String preco, boolean vendido) {
 		this.titulo = titulo;
 		this.fileName = caminhoImagem;
 		this.imagem = imagem;
@@ -100,11 +100,11 @@ public class Produto {
 		this.descricao = descricao;
 	}
 
-	public BigDecimal getPreco() {
-		return preco;
+	public String getPreco() {
+		return preco != null ? preco : "0,00";
 	}
 
-	public void setPreco(BigDecimal preco) {
+	public void setPreco(String preco) {
 		this.preco = preco;
 	}
 

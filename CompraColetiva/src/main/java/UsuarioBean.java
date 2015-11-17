@@ -2,73 +2,60 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.enterprise.context.RequestScoped;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 
 import model.Usuario;
 import util.MessagesUtil;
-import util.jpa.transactional.Transactional;
+import dao.UsuarioDao;
 
 @Named(value="usuarioBean")
-//@ViewScoped
-@ViewScoped
+@RequestScoped
 public class UsuarioBean implements Serializable{
 	
+	private static final long serialVersionUID = -4176584480398173213L;
+
 	private Usuario usuario = new Usuario();
-	
-	@Inject
-	private EntityManager manager ;
 	
 	private List<Usuario> todos = new ArrayList<Usuario>();
 	
-	@Transactional
-	public String salvar(){
+	@Inject
+	private UsuarioDao usuarioDao;
+	
+	public void salvar(){
 		
 		/*Se Cadastrando novo usuário*/
 		if(usuario.getId() == null){
 			/*Se login não Disponível*/
 			if(!loginDisponivel()){
 				MessagesUtil.addErrorMessage("Login já está em uso!");
-				return null;
+				return;
 			}
 		}
 		
-		manager.merge(usuario);
+		usuarioDao.salvar(usuario);
 		
 		usuario = new Usuario();
 		
 		MessagesUtil.addInformationMessage("Salvo com sucesso!");
 			
 //		return "usuario.xhtml?faces-redirect=true";
-		return "";
+//		return "usuario.xhtml";
+//		return "";
 	}
 	
 	public List<Usuario> getTodos(){
-		
-		this.todos = this.manager.createQuery("FROM Usuario u", Usuario.class).getResultList();
-
-		return todos;
+		return usuarioDao.getTodos();
 	}
 	
 	public boolean loginDisponivel(){
-		try{	
-			Usuario login = manager
-				.createQuery("FROM Usuario u WHERE u.login = :login", Usuario.class)
-				.setParameter("login", usuario.getLogin())
-				.getSingleResult();
-			
-			return false;
-		}catch(NoResultException nre){
-			return true;
-		}
+		return usuarioDao.loginDisponivel(usuario);
 	}
 	
-	@Transactional
 	public void remover(){
-		 manager.remove(manager.getReference(Usuario.class, usuario.getId()));	
+		 usuarioDao.remover(this.usuario);	
 	}
 
 	public Usuario getUsuario() {
