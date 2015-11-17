@@ -42,26 +42,40 @@
 			<p:dialog header="Produto" widgetVar="produtoDialog" modal="true"
 				showEffect="fade" hideEffect="fade" resizable="false">
 				<p:outputPanel id="produtoDetail" style="text-align:center;">
-					<p:panelGrid columns="2"
-						rendered="#{not empty vendaProdutosBean.produtoSelecionado}"
-						columnClasses="label,value">
-						<f:facet name="header">
-							<o:graphicImage value="#{imageStreamerProduto.getImagem(vendaProdutosBean.produtoSelecionado.id)}"
-								 width="700" height="400"/>
-						</f:facet>
-
-						<h:outputText value="Titulo:" />
-						<h:outputText value="#{vendaProdutosBean.produtoSelecionado.titulo}" />
-
-						<h:outputText value="Telefone:" />
-						<h:outputText value="#{vendaProdutosBean.produtoSelecionado.telefoneVendedor}" />
-
-						<h:outputText value="Descrição:" />
-						<h:outputText value="#{vendaProdutosBean.produtoSelecionado.descricao}" />
-
-						<h:outputText value="Preço:" />
-						<h:outputText value="R$ #{vendaProdutosBean.produtoSelecionado.preco}" />
-					</p:panelGrid>
+					<h:form>
+						<p:panelGrid columns="2"
+							rendered="#{not empty vendaProdutosBean.produtoSelecionado}"
+							columnClasses="label,value">
+							<f:facet name="header">
+								<o:graphicImage value="#{imageStreamerProduto.getImagem(vendaProdutosBean.produtoSelecionado.id)}"
+									 width="700" height="400"/>
+							</f:facet>
+	
+							<h:outputText value="Titulo:" />
+							<h:outputText value="#{vendaProdutosBean.produtoSelecionado.titulo}" />
+	
+							<h:outputText value="Telefone:" />
+							<h:outputText value="#{vendaProdutosBean.produtoSelecionado.telefoneVendedor}" />
+	
+							<h:outputText value="Descrição:" />
+							<h:outputText value="#{vendaProdutosBean.produtoSelecionado.descricao}" />
+	
+							<h:outputText value="Preço:" />
+							<h:outputText value="R$ #{vendaProdutosBean.produtoSelecionado.preco}" />
+							
+							<h:outputText value="Digite seu e-mail:" />
+							<h:panelGroup>
+								<p:inputText id="emailcomprador" value="#{vendaProdutosBean.emailComprador}" size="70"
+									 required="true" requiredMessage="E-mail é obrigatório!"/>
+									 <p:message id="msgemail"  for="emailcomprador"/>
+								<br/><br/>
+								<p:commandButton value="Receber boleto por e-mail" 
+									update="msgemail emailcomprador"
+									onclick="alert('Você receberá um boleto por email!')"
+									action="#{vendaProdutosBean.verificarEmail}"/>
+							</h:panelGroup>	
+						</p:panelGrid>
+					</h:form>
 				</p:outputPanel>
 			</p:dialog>
 		</h:form>

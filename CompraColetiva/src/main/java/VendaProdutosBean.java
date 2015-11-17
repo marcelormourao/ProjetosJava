@@ -7,6 +7,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import util.MessagesUtil;
 import model.Produto;
 import dao.ProdutoDao;
  
@@ -21,6 +22,8 @@ public class VendaProdutosBean implements Serializable {
     private Produto produtoSelecionado;
     
     private @Inject ProdutoDao produtoDao;
+    
+    private String emailComprador;
     
     @PostConstruct
     public void carregarPagina(){
@@ -42,5 +45,20 @@ public class VendaProdutosBean implements Serializable {
 	public void setProdutoSelecionado(Produto produtoSelecionado) {
 		this.produtoSelecionado = produtoSelecionado;
 	}
+
+	public String getEmailComprador() {
+		return emailComprador;
+	}
+
+	public void setEmailComprador(String emailComprador) {
+		this.emailComprador = emailComprador;
+	}
     
+	public void verificarEmail(){
+		if(emailComprador == null || emailComprador.equals("") || emailComprador.length() <= 15){
+			MessagesUtil.addErrorMessage("Por favor, digite uma email válido!");
+		}else{
+			MessagesUtil.addInformationMessage("Você receberá um email para confirmar sua compra!");
+		}
+	}
 }
