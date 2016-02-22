@@ -45,7 +45,7 @@
 					<h:panelGroup>
 						<p:commandButton value="Cadastrar" action="#{usuarioBean.salvar}" update="@form table label"/>
 
-						<p:commandButton value="Limpar" update="@form" process="@this" style="margin-left:10px;">
+						<p:commandButton value="Limpar" action="#{usuarioBean.limparCampos}" binding="#{usuarioBean.commandButton}" update="@form" process="@this" style="margin-left:10px;" disabled="#{usuarioBean.limparDisabled}">
 							<p:resetInput target="@form" />
 						</p:commandButton>
 					</h:panelGroup>
